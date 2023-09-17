@@ -4,11 +4,11 @@ RSpec.describe "merchant#show" do
   before(:each) do
     @merchant_1 = create(:merchant)
     @merchant_2 = create(:merchant)
-    @customer_1 = create(:first_name, :last_name)
-    @customer_2 = create(:first_name, :last_name)
-    @customer_3 = create(:first_name, :last_name)
-    @customer_4 = create(:first_name, :last_name)
-    @customer_5 = create(:first_name, :last_name)
+    @customer_1 = create(:customer)
+    @customer_2 = create(:customer)
+    @customer_3 = create(:customer)
+    @customer_4 = create(:customer)
+    @customer_5 = create(:customer)
     @item_1 = create(:item, merchant_id: @merchant_1.id, unit_price: 1234)
     @item_2 = create(:item, merchant_id: @merchant_1.id)
     @item_3 = create(:item, merchant_id: @merchant_1.id)
@@ -21,7 +21,7 @@ RSpec.describe "merchant#show" do
     @invoice_1 = create(:invoice, customer_id: @customer_1.id)
     @invoice_2 = create(:invoice, customer_id: @customer_1.id)
 
-    @invoice_item_1 = create(:invoice_item, :item_id @item_1.id, :status "packaged")
+    @invoice_item_1 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_1.id , status: "packaged")
   end
 
   describe "display merchant info" do
@@ -48,11 +48,18 @@ RSpec.describe "merchant#show" do
   describe "merchant top 5 customers" do 
     it "shows the top 5 customers with the largest successful transactions with this merchant" do
       visit "/merchants/#{@merchant_1.id}/dashboard"
+      
+        expect(page).to have_content(@customer_1.first_name)
+        expect(page).to have_content(@customer_2.first_name)
+        expect(page).to have_content(@customer_3.first_name)
+        expect(page).to have_content(@customer_4.first_name)
+        expect(page).to have_content(@customer_5.first_name)
 
-      within("#top_five_customers-#{@merchant_1.id}") do
-        expect(page).to have_content([@customer_1.first_name, @customer_2.first_name, @customer_3.first_name, @customer_4.first_name, @customer_5.first_name])
-        expect(page).to have_content([@customer_1.amount_of_transactions, @customer_2.amount_of_transactions, @customer_3.amount_of_transactions, @customer_4.amount_of_transactions, @customer_5.amount_of_transactions])
-      end
+        expect(page).to have_content(@customer_1.amount_of_transactions)
+        expect(page).to have_content(@customer_2.amount_of_transactions)
+        expect(page).to have_content(@customer_3.amount_of_transactions)
+        expect(page).to have_content(@customer_4.amount_of_transactions)
+        expect(page).to have_content(@customer_5.amount_of_transactions)
     end
   end
 

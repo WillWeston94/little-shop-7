@@ -12,7 +12,7 @@ RSpec.describe Item, type: :model do
     it { should validate_presence_of(:description) }
   end
 
-  describe "unit_price_formatted" do
+  describe "#unit_price_formatted" do
     it "can convert unit_price to dollars" do
       item = Item.new(unit_price: 12345)
       expect(item.unit_price_formatted).to eq(123.45)
@@ -24,9 +24,9 @@ RSpec.describe Item, type: :model do
     end
   end
 
-  describe "ready_to_ship" do
+  describe "#ready_to_ship" do
     it "can display items with a status of 'packaged'" do
-      item = 
+    
     end
   end
 end

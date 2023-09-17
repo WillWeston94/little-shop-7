@@ -1,5 +1,7 @@
+<section id="invoice_details">
 <h1>Invoice </h1>
 <p>ID: <%= @invoice.id %></p>
 <p>STATUS: <%= @invoice.status %></p>
 <p>CREATED_AT: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
 <p>CUSTOMER NAME: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
+</section>

@@ -5,7 +5,7 @@ class Invoice < ApplicationRecord
 
   validates :status, presence: true
 
-  enum status: {"in progress" => 0, "completed" => 1, "cancelled" => 2}
+  enum :status,["in progress", "completed", "cancelled"]
 
   def self.not_fulfilled
     where(status: 0)
