@@ -14,7 +14,7 @@
       <%= form_with model: invoice_item, url: merchant_invoice_update_path(@merchant, @invoice), method: :patch do |f| %>        
         <%= f.hidden_field :invoice_item_id, value: invoice_item.id %>
         <%= f.label :status %>
-        <%= f.select :status, options_for_select([['pending', 0], ['packaged', 1], ['shipped', 2]], selected: invoice_item.status) %>
+        <%= f.select :status, ['pending', 'packaged', 'shipped'], selected: invoice_item.status %>
         <%= f.submit 'Update Item Status' %>
       <% end %>
 </ul>

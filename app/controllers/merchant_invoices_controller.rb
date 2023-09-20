@@ -17,7 +17,7 @@ class MerchantInvoicesController < ApplicationController
 
     invoice_item = @specific_invoice_items.find(params[:invoice_item][:invoice_item_id])
 
-    new_status = params[:invoice_item][:status].to_i
+    new_status = params[:invoice_item][:status]
     invoice_item.update(status: new_status)
     invoice_item.save
 

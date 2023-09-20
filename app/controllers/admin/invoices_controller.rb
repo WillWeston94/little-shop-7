@@ -9,7 +9,7 @@ class Admin::InvoicesController < ApplicationController
 
   def update 
     @invoice = Invoice.find(params[:invoice_id])
-    require 'pry';binding.pry
+
     new_status = params[:invoice][:status]
     @invoice.update(status: new_status)
     @invoice.save
