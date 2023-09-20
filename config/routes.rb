@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get "/merchants/:merchant_id/invoices/:invoice_id", to: "merchant_invoices#show"
   patch "/merchants/:merchant_id/invoices/:invoice_id", to: "merchant_invoices#update", as: "merchant_invoice_update"
   patch "/merchants/:merchant_id/items/:item_id", to: "merchant_items#update"
-
+  patch "/admin/invoices/:invoice_id", to: "admin/invoices#update", as: "admin_invoice_update"
   get "/items/:id/edit", to: "items#edit"
   patch "/items/:id", to: "items#update"
 

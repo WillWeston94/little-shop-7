@@ -1,12 +1,28 @@
-<%= render partial: "invoice_details", locals: { invoice: @invoice} %>
+<section id="invoice_details">
+<h1>Invoice </h1>
+<p>ID: <%= @invoice.id %></p>
+<p>STATUS: <%= @invoice.status %>
+        <%= form_with model: @invoice, url: admin_invoice_update_path(@invoice), method: :patch do |f| %>        
+        <%= f.hidden_field :invoice_id, value: @invoice.id %>
+        <%= f.label :status %>
+        <%= f.select :status, options_for_select([['in progress', 0], ['completed', 1], ['cancelled', 2]], selected: @invoice.status) %>
+        <%= f.submit 'Update Invoice Status' %>
+</p>
+<p>CREATED AT: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
+<p>CUSTOMER NAME: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
+</section>
 
+<ul>
 <p id="invoice_items">Invoice Items: 
   <% @invoice.invoice_items.each do |invoice_item| %>
   <li>ITEM NAME: <%= invoice_item.item.name %></li>
   <li>QUANTITY: <%= invoice_item.quantity %></li>
   <li>UNIT PRICE: <%= number_to_currency(invoice_item.unit_price / 100.0) %></li>
   <li>ITEM STATUS: <%= invoice_item.status %></li>
-  <br>
+    <br>
+<% end %>
+</ul>
+
   <% end %>
 </p>
 
@@ -14,3 +30,5 @@
   <h2>Revenue Generated</h2>
   <p>Total Revenue for Invoice <%= @invoice.id %> is: <%= number_to_currency(@invoice.total_revenue / 100) %></p>
 </section>
+
+
