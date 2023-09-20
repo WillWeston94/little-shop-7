@@ -13,36 +13,36 @@ class Merchant < ApplicationRecord
   end
 
   def default_status
-    self.disabled = true if self.disabled.nil?
+    self.disabled = true if disabled.nil?
   end
 
   def self.top_revenue
     joins(invoices: :transactions)
-      .where(transactions: { result: 1 })
-      .group('merchants.id')
-      .order(Arel.sql('SUM(invoice_items.quantity * invoice_items.unit_price) DESC'))
+      .where(transactions: {result: 1})
+      .group("merchants.id")
+      .order(Arel.sql("SUM(invoice_items.quantity * invoice_items.unit_price) DESC"))
       .limit(5)
   end
 
   def revenue
     invoices
       .joins(:transactions)
-      .where(transactions: { result: 1 })
-      .sum('invoice_items.quantity * invoice_items.unit_price')
+      .where(transactions: {result: 1})
+      .sum("invoice_items.quantity * invoice_items.unit_price")
   end
 
   def top_date
     invoices
       .joins(:invoice_items)
-      .group('DATE(invoices.created_at)')
-      .select('DATE(invoices.created_at) AS date, SUM(invoice_items.quantity * invoice_items.unit_price) AS total_revenue')
-      .order(Arel.sql('SUM(invoice_items.quantity * invoice_items.unit_price) DESC'))
+      .group("DATE(invoices.created_at)")
+      .select("DATE(invoices.created_at) AS date, SUM(invoice_items.quantity * invoice_items.unit_price) AS total_revenue")
+      .order(Arel.sql("SUM(invoice_items.quantity * invoice_items.unit_price) DESC"))
       .limit(1)
-      .pluck('DATE(invoices.created_at)')
+      .pluck("DATE(invoices.created_at)")
       .first
   end
 
-  def ready_to_ship 
+  def ready_to_ship
     items
       .joins(:invoice_items)
       .joins("INNER JOIN invoices ON invoices.id = invoice_items.invoice_id")

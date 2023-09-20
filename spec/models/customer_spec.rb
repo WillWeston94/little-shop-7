@@ -18,7 +18,7 @@ RSpec.describe Customer, type: :model do
       customer_4 = create(:customer)
       customer_5 = create(:customer)
       customer_6 = create(:customer)
-    
+
       invoice_1 = create(:invoice, customer: customer_1)
       invoice_2 = create(:invoice, customer: customer_2)
       invoice_3 = create(:invoice, customer: customer_3)
@@ -42,7 +42,7 @@ RSpec.describe Customer, type: :model do
   describe "#amount of transactions" do
     it "can count the amount of transactions from a customer" do
       customer_1 = create(:customer)
-    
+
       invoice_1 = create(:invoice, customer: customer_1)
 
       transactions_for_invoice_1 = create_list(:transaction, 4, invoice: invoice_1)
