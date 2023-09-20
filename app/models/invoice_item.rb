@@ -4,10 +4,9 @@ class InvoiceItem < ApplicationRecord
 
   validates :quantity, presence: true
   validates :unit_price, presence: true
-  validates :status, presence: true
 
-  enum status: {"pending" => 0, "packaged" => 1, "shipped" => 2}
 
+  enum :status, ["pending", "packaged", "shipped"]
 
   def self.merchant_specific(merchant)
     where(item: merchant.items)
