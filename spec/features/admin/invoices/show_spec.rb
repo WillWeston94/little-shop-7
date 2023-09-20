@@ -65,7 +65,7 @@ RSpec.describe "the admin invoices show page" do
   describe "US 36 admin invoice show page" do
     describe "I see the invoice status is a select field and I see that the invoice's current status is selected when I click this select field" do
       describe "then I can select a new status for the Invoice, and next to the select field I see a button to 'Update Invoice Status'" do
-        xit "When I click this button I am taken back to the admin invoice show page and I see that my Invoice's status has now been updated" do
+        it "When I click this button I am taken back to the admin invoice show page and I see that my Invoice's status has now been updated" do
           customer = create(:customer)
           merchant = create(:merchant)
           item_1 = create(:item, merchant_id: merchant.id)
@@ -77,8 +77,11 @@ RSpec.describe "the admin invoices show page" do
           invoice_item_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice.id, status: 1, quantity: 1, unit_price: 1)
 
           visit "/admin/invoices/#{invoice.id}"
+          save_and_open_page
+          within("#invoice_details") do
 
-          expect(page).to have_select("Invoice Status", selected: @invoice.status)
+          expect(page).to have_select("invoice_status", selected: 1)
+          end
         end
       end
     end

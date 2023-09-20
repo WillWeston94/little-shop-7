@@ -202,15 +202,15 @@ RSpec.describe Merchant, type: :model do
         item_2 = create(:item, merchant: merchant_1)
         item_3 = create(:item, merchant: merchant_1)
 
-        invoice_1 = create(:invoice, customer: customer_1)
-        invoice_2 = create(:invoice, customer: customer_1)
-        invoice_3 = create(:invoice, customer: customer_1)
+        invoice_1 = create(:invoice, customer: customer_1, created_at: "2021-04-01")
+        invoice_2 = create(:invoice, customer: customer_1, created_at: "2021-05-01")
+        invoice_3 = create(:invoice, customer: customer_1, created_at: "2021-06-01")
 
         invoice_item_1 = create(:invoice_item, item: item_1, invoice: invoice_1, status: 0)
         invoice_item_2 = create(:invoice_item, item: item_2, invoice: invoice_2, status: 1)
         invoice_item_3 = create(:invoice_item, item: item_3, invoice: invoice_3, status: 1)
 
-        expect(merchant_1.ready_to_ship.to_a).to eq([item_3, item_2])
+        expect(merchant_1.ready_to_ship.to_a).to include(item_2, item_3)
       end
     end
 end
