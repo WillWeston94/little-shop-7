@@ -46,6 +46,7 @@ class Merchant < ApplicationRecord
     items
       .joins(:invoice_items)
       .joins("INNER JOIN invoices ON invoices.id = invoice_items.invoice_id")
+      .select("items.*, invoice_items.invoice_id AS invoice_id, invoices.created_at AS invoice_created_at")
       .where(invoice_items: {status: 1})
       .order("invoices.created_at ASC")
   end
