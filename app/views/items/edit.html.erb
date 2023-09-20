@@ -1,13 +1,7 @@
 <h1>Update <%= @item.name %></h1>
 
-<%= form_with url: "/items/#{@item.id}", method: :patch, data: { turbo: false } do |form| %>
-  <%= form.label :name, "Name:" %>
-  <%= form.text_field :name, value: @item.name %><br>
-  <%= form.label :description, "Description:" %>
-  <%= form.text_field :description, value: @item.description %><br>
-  <%= form.label :unit_price, "Unit Price:" %>
-  <%= form.text_field :unit_price, value: @item.unit_price %><br>
-  <%= form.label :merchant_id, "Merchant ID:" %>
-  <%= form.text_field :merchant_id, value: @item.merchant_id %><br>
-  <%= form.submit "Update Item" %>
-<% end %>
+<%= render partial: 'form', locals: {
+                                      path: "/items/#{@item.id}",
+                                      method: :patch,
+                                      button_text: 'Update Item'
+																		} %>

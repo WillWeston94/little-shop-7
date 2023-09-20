@@ -7,20 +7,17 @@
   <%= f.label :status %>
   <%= f.select :status, ['in progress', 'completed', 'cancelled'], selected: @invoice.status %>
   <%= f.submit 'Update Invoice Status' %>
+  <% end %>
 </section>
 
 <ul>
 <p id="invoice_items">Invoice Items: 
   <% @invoice.invoice_items.each do |invoice_item| %>
-  <li>ITEM NAME: <%= invoice_item.item.name %></li>
-  <li>QUANTITY: <%= invoice_item.quantity %></li>
-  <li>UNIT PRICE: <%= number_to_currency(invoice_item.unit_price / 100.0) %></li>
-  <li>ITEM STATUS: <%= invoice_item.status %></li>
+  <%= render partial: "/merchant_invoices/invoice_items_details", locals: { invoice_item: invoice_item} %>
     <br>
-<% end %>
+  <% end %>
 </ul>
 
-  <% end %>
 </p>
 
 <section id="total_revenue">

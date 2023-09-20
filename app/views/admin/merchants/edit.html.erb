@@ -1,12 +1,7 @@
 <h1> Edit Merchant </h1>
 
-<%= form_for [:admin, @merchant] do |f| %>
-  <div class= "field">
-    <%= f.label :name %>
-    <%= f.text_field :name, value: @merchant.name %>
-  </div>
-
-  <div class= "actions">
-    <%= f.submit "Submit" %>
-  </div>
-<% end %>
+<%= render partial: 'form', locals: {
+                                      path: [:admin],
+                                      method: :patch,
+                                      button_text: 'Submit'
+																		} %>
