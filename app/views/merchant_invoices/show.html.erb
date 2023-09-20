@@ -1,10 +1,4 @@
-<section id="invoice_details">
-<h1>Invoice </h1>
-<p>ID: <%= @invoice.id %></p>
-<p>STATUS: <%= @invoice.status %></p>
-<p>CREATED AT: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
-<p>CUSTOMER NAME: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
-</section>
+<%= render partial: "admin/invoices/invoice_details", locals: { invoice: @invoice} %>
 
 <section id="total_rev">
 <h2>Total Revenue: <%= number_to_currency(@invoice.total_revenue / 100) %></h2>
