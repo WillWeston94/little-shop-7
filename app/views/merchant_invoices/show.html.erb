@@ -6,14 +6,16 @@
 
 <section id="invoice_item_details">
   <% @specific_invoice_items.each do |invoice_item| %>
-<ul>
-  <%= render partial: "invoice_items_details", locals: { invoice_item: invoice_item} %>
-      <%= form_with model: invoice_item, url: merchant_invoice_update_path(@merchant, @invoice), method: :patch do |f| %>        
-        <%= f.hidden_field :invoice_item_id, value: invoice_item.id %>
-        <%= f.label :status %>
-        <%= f.select :status, ['pending', 'packaged', 'shipped'], selected: invoice_item.status %>
-        <%= f.submit 'Update Item Status' %>
-      <% end %>
-</ul>
-<% end %>
+    <section id="invoice_item-<%= invoice_item.id %>">
+      <ul>
+        <%= render partial: "invoice_items_details", locals: { invoice_item: invoice_item} %>
+            <%= form_with model: invoice_item, url: merchant_invoice_update_path(@merchant, @invoice), method: :patch do |f| %>        
+              <%= f.hidden_field :invoice_item_id, value: invoice_item.id %>
+              <%= f.label :status %>
+              <%= f.select :status, ['pending', 'packaged', 'shipped'], selected: invoice_item.status %>
+              <%= f.submit 'Update Item Status' %>
+            <% end %>
+      </ul>
+    </section>
+  <% end %>
 </section>

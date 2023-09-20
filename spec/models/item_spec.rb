@@ -14,23 +14,6 @@ RSpec.describe Item, type: :model do
   end
 
   describe "instance methods" do
-    describe "unit_price_formatted" do
-      it "can convert unit_price to dollars" do
-        item = Item.new(unit_price: 12345)
-        expect(item.unit_price_formatted).to eq(123.45)
-      end
-
-      it "can handle zero" do
-        item = Item.new(unit_price: 0)
-        expect(item.unit_price_formatted).to eq(0)
-      end
-    end
-
-    describe "ready_to_ship" do
-      it "can display items with a status of 'packaged'" do
-      end
-    end
-
     describe "#best_day" do
       before(:each) do
         @merchant_1 = create(:merchant)

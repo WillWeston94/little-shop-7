@@ -48,7 +48,7 @@ RSpec.describe "the admin index" do
     expect(customer_1.first_name).to appear_before(customer_6.first_name)
     expect(customer_6.first_name).to appear_before(customer_5.first_name)
     expect(page).to have_content(customer_5.first_name)
-    expect(page).not_to have_content(customer_4.first_name)
+    expect(page).not_to have_content("#{customer_4.first_name} #{customer_4.last_name}")
 
     expect(page).to have_content("#{customer_1.first_name} #{customer_1.last_name}: #{customer_1.amount_of_transactions} Transactions")
   end

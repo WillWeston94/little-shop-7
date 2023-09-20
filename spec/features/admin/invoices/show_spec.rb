@@ -78,7 +78,7 @@ RSpec.describe "the admin invoices show page" do
 
           visit "/admin/invoices/#{invoice.id}"
 
-          within("#invoice_details") do
+          within("#invoice_status_form") do
             expect(page).to have_select("invoice_status", selected: invoice.status)
             page.select("completed")
             click_button("Update Invoice Status")

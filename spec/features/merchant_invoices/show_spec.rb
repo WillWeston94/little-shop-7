@@ -71,33 +71,37 @@ RSpec.describe "the merchant invoices show page" do
     end
   end
 
-  describe "displays a select field to update the item's status " do
-    xit "and when I click that select field I can select a new status and click a button to update the item's status" do
-      @merchant_1 = create(:merchant)
-      @merchant_2 = create(:merchant)
-      @customer_1 = create(:customer)
+    describe "displays a select field to update the item's status " do
+      it "and when I click that select field I can select a new status and click a button to update the item's status" do
+        @merchant_1 = create(:merchant)
+        @merchant_2 = create(:merchant)
+        @customer_1 = create(:customer)
+    
+        @item_1 = create(:item, merchant_id: @merchant_1.id)
+        @item_2 = create(:item, merchant_id: @merchant_2.id)
+        @item_3 = create(:item, merchant_id: @merchant_1.id)
+    
+        @invoice_1 = create(:invoice, customer_id: @customer_1.id)
+  
+        @invoice_item_1 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 2, unit_price: 10, status: 1)
+        @invoice_item_2 = create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_1.id, unit_price: 20, status: 1)
+        @invoice_item_3 = create(:invoice_item, item_id: @item_3.id, invoice_id: @invoice_1.id, unit_price: 30, status: 1)
+  
+        visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
 
-      @item_1 = create(:item, merchant_id: @merchant_1.id)
-      @item_2 = create(:item, merchant_id: @merchant_2.id)
-      @item_3 = create(:item, merchant_id: @merchant_1.id)
+        within("#invoice_item-#{@invoice_item_1.id}") do
+          expect(page).to have_content("ITEM STATUS: packaged")
+    
+          page.select "shipped"
+          click_button "Update Item Status"
+        end
 
-      @invoice_1 = create(:invoice, customer_id: @customer_1.id)
+        expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}")
 
-      @invoice_item_1 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 2, unit_price: 10, status: 1)
-      @invoice_item_2 = create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_1.id, unit_price: 20, status: 1)
-      @invoice_item_3 = create(:invoice_item, item_id: @item_3.id, invoice_id: @invoice_1.id, unit_price: 30, status: 1)
-
-      visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
-
-      within("#invoice_item_details") do
-        expect(page).to have_content("ITEM STATUS: packaged")
-
-        select "shipped", from: "Status"
-        click_button "Update Item Status"
-
-        expect(current_path).to eq("/merchants/1/invoices/1")
-        expect(page).to have_content("ITEM STATUS: shipped")
+        within("#invoice_item-#{@invoice_item_1.id}") do
+          expect(page).to have_content("ITEM STATUS: shipped")
+        end
       end
     end
   end
-end
+
