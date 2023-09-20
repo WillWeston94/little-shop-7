@@ -64,7 +64,7 @@ RSpec.describe "merchant#show" do
     it "shows the top 5 customers with the largest successful transactions with this merchant" do
 
       visit "/merchants/#{@merchant_1.id}/dashboard"
-     
+
       within("#top_five_customers-#{@merchant_1.id}") do
         expect(page).to have_content(@customer_1.first_name)
         expect(page).to have_content("#{@customer_1.first_name} #{@customer_1.last_name} (#{@customer_1.amount_of_transactions}Transactions)")
