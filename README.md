@@ -23,13 +23,20 @@ Our project was the creation of a web-app framework for an online retail store w
 
 ## Personal Reflections
 
-## Contributors
 
-- Tyler Blackmon
-- Nicholas McEnroe
-- Cory Powell
-- Edward A Rodriguez
-- William Weston
+## Future Potential
+- Add the functionality to deploy an API 
+- Add site wide styling that has a consisent look and feel throughout
+- 
+
+## Contributors:
+
+- Will Weston - [Github](https://github.com/WillWeston94) || [LinkedIn](https://www.linkedin.com/in/weston-william/)
+- Tyler Blackmon - [Github](https://github.com/tblackmon-tiel) || [LinkedIn](https://www.linkedin.com/in/tyler-blackmon/)
+- Nicholas McEnroe - [Github](https://github.com/NSMcEnroe) || [LinkedIn](https://www.linkedin.com/in/nicholasmcenroe/)
+- Edward Rodriguez - [Github](https://github.com/TheAveryRodriguez) || [LinkedIn](https://www.linkedin.com/in/edward-avery-rodriguez/)
+- Cory Powell - [Github](https://github.com/coryrpow) || [LinkedIn](https://www.linkedin.com/in/coryrpow/)
+
 
 ## DTR 
 [DTR Link](https://docs.google.com/document/d/1KnudgigtRSa36lwspm11bNRnj7BeY-r6E2UZXSEq-1c/edit)
