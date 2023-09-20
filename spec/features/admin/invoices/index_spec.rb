@@ -12,7 +12,7 @@ RSpec.describe "the admin invoices index page" do
   describe "complete invoices list" do
     it "lists all invoice id's in the system" do
       customer = create(:customer)
-      
+
       invoice_1 = customer.invoices.create!(status: 0)
       invoice_2 = customer.invoices.create!(status: 1)
       invoice_3 = customer.invoices.create!(status: 2)

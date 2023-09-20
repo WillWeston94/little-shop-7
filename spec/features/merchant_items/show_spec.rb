@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "MerchantItems Show", type: :feature do
   before(:each) do
@@ -26,7 +26,7 @@ RSpec.describe "MerchantItems Show", type: :feature do
 
     it "has a link to update that item" do
       visit "/merchants/#{@merchant_1.id}/items/#{@item_1.id}"
-      
+
       expect(page).to have_link("Update Item", href: "/items/#{@item_1.id}/edit")
     end
   end

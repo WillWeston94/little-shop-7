@@ -8,7 +8,7 @@ RSpec.describe "merchant#show" do
     @customer_3 = create(:customer)
     @customer_4 = create(:customer)
     @customer_5 = create(:customer)
-    
+
     @item_1 = create(:item, merchant_id: @merchant_1.id)
     @item_2 = create(:item, merchant_id: @merchant_1.id)
     @item_3 = create(:item, merchant_id: @merchant_1.id)
@@ -33,15 +33,14 @@ RSpec.describe "merchant#show" do
     @transaction_4 = create(:transaction, invoice_id: @invoice_4.id, result: 1)
     @transaction_5 = create(:transaction, invoice_id: @invoice_5.id, result: 1)
   end
-  
-  describe "display merchant info" do
 
+  describe "display merchant info" do
     it "has merchant info listed " do
       merchant_1 = create(:merchant)
 
       visit "/merchants/#{merchant_1.id}/dashboard"
-      
-      within("#merchant_info-#{merchant_1.id}") do 
+
+      within("#merchant_info-#{merchant_1.id}") do
         expect(page).to have_content(merchant_1.name)
       end
     end
@@ -60,11 +59,10 @@ RSpec.describe "merchant#show" do
     end
   end
 
-  describe "merchant top 5 customers" do 
+  describe "merchant top 5 customers" do
     it "shows the top 5 customers with the largest successful transactions with this merchant" do
-
       visit "/merchants/#{@merchant_1.id}/dashboard"
-     
+
       within("#top_five_customers-#{@merchant_1.id}") do
         expect(page).to have_content(@customer_1.first_name)
         expect(page).to have_content("#{@customer_1.first_name} #{@customer_1.last_name} (#{@customer_1.amount_of_transactions}Transactions)")
@@ -78,19 +76,16 @@ RSpec.describe "merchant#show" do
 
   describe "merchant items ready to ship" do
     it "has a list of items that have been ordered and not yet shipped" do
-    
       visit "/merchants/#{@merchant_1.id}/dashboard"
 
       within("#items_to_ship-#{@merchant_1.id}") do
         expect(page).to have_content(@item_1.name)
       end
-
     end
 
     it "displays the id of the invoice for the ordered item and a link to the merchant's invoice show page" do
-      
       visit "/merchants/#{@merchant_1.id}/dashboard"
-  
+
       within("#items_to_ship-#{@merchant_1.id}") do
         expect(page).to have_content(@invoice_1.id)
         expect(page).to have_link(@invoice_1.id)
@@ -106,7 +101,6 @@ RSpec.describe "merchant#show" do
         expect(@item_2.name).to appear_before(@item_3.name, only_text: true)
         expect(@item_3.name).to appear_before(@item_4.name, only_text: true)
       end
-
     end
   end
 end

@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Items Edit", type: :feature do
   before(:each) do
@@ -28,7 +28,7 @@ RSpec.describe "Items Edit", type: :feature do
 
     it "updates the item and returns the user to the item show page when the form is submitted" do
       visit "/items/#{@item_1.id}/edit"
-      
+
       fill_in "name", with: "Updated Name"
       fill_in "description", with: "Updated Description"
       fill_in "unit_price", with: "10234"

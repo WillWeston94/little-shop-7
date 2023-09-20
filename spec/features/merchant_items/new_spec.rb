@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "Merchant Items New", type: :feature do
   before(:each) do

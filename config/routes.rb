@@ -16,20 +16,18 @@ Rails.application.routes.draw do
   get "/items/:id/edit", to: "items#edit"
   patch "/items/:id", to: "items#update"
 
-
-  namespace :admin, path: '/admin' do
-    get '', to: 'dashboard#index', as: 'dashboard'
+  namespace :admin, path: "/admin" do
+    get "", to: "dashboard#index", as: "dashboard"
 
     resources :merchants do
       member do
         put :disable_enable, to: "merchants#disable_enable", as: :disable_enable
       end
     end
-    
+
     resources :invoices, only: [:show]
   end
 
   get "/admin/invoices", to: "admin/invoices#index"
   get "/admin/invoices/:id", to: "admin/invoices#show"
 end
-

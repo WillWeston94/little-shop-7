@@ -1,7 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "MerchantItems Index", type: :feature do
-  
   describe "When I visit the merchantitems index page" do
     before(:each) do
       @merchant_1 = create(:merchant)
@@ -93,25 +92,25 @@ RSpec.describe "MerchantItems Index", type: :feature do
     before(:each) do
       @merchant_1 = create(:merchant)
       @merchant_2 = create(:merchant)
-  
+
       @customer_1 = create(:customer)
       @customer_2 = create(:customer)
-  
+
       @invoice_1 = create(:invoice, customer: @customer_1, created_at: "2012-03-25 09:54:09 UTC")
       @invoice_2 = create(:invoice, customer: @customer_1, created_at: "2012-03-26 09:54:09 UTC")
       @invoice_3 = create(:invoice, customer: @customer_2)
       @invoice_4 = create(:invoice, customer: @customer_2)
-  
+
       @item_1 = create(:item, merchant: @merchant_1)
-      @item_2 = create(:item, merchant: @merchant_1) #
-      @item_3 = create(:item, merchant: @merchant_1) #
+      @item_2 = create(:item, merchant: @merchant_1)
+      @item_3 = create(:item, merchant: @merchant_1)
       @item_4 = create(:item, merchant: @merchant_1)
-      @item_5 = create(:item, merchant: @merchant_1) #
-      @item_6 = create(:item, merchant: @merchant_1) #
-      @item_7 = create(:item, merchant: @merchant_1) #
+      @item_5 = create(:item, merchant: @merchant_1)
+      @item_6 = create(:item, merchant: @merchant_1)
+      @item_7 = create(:item, merchant: @merchant_1)
       @item_8 = create(:item, merchant: @merchant_2)
       @item_9 = create(:item, merchant: @merchant_2)
-  
+
       @invoice_item_1 = create(:invoice_item, item: @item_1, invoice: @invoice_1, quantity: 1, unit_price: 500, status: 1)
       @invoice_item_2 = create(:invoice_item, item: @item_2, invoice: @invoice_1, quantity: 1, unit_price: 1000, status: 1)
       @invoice_item_3 = create(:invoice_item, item: @item_2, invoice: @invoice_2, quantity: 3, unit_price: 1000, status: 1)
@@ -126,7 +125,6 @@ RSpec.describe "MerchantItems Index", type: :feature do
     end
 
     it "displays the top 5 most popular items, ranked by total revenue generated, and displays that revenue" do
-
       visit "/merchants/#{@merchant_1.id}/items"
 
       within("#popular-items") do
@@ -152,11 +150,11 @@ RSpec.describe "MerchantItems Index", type: :feature do
     it "displays the best day for each of the most popular items" do
       visit "/merchants/#{@merchant_1.id}/items"
 
-      expect(page).to have_content(("#{@item_7.name} - Total revenue: $48.00 - Top selling date: 03/25/2012"))
-      expect(page).to have_content(("#{@item_2.name} - Total revenue: $40.00 - Top selling date: 03/26/2012"))
-      expect(page).to have_content(("#{@item_6.name} - Total revenue: $35.00 - Top selling date: 03/25/2012"))
-      expect(page).to have_content(("#{@item_3.name} - Total revenue: $30.00 - Top selling date: 03/26/2012"))
-      expect(page).to have_content(("#{@item_5.name} - Total revenue: $10.00 - Top selling date: 03/25/2012"))
+      expect(page).to have_content("#{@item_7.name} - Total revenue: $48.00 - Top selling date: 03/25/2012")
+      expect(page).to have_content("#{@item_2.name} - Total revenue: $40.00 - Top selling date: 03/26/2012")
+      expect(page).to have_content("#{@item_6.name} - Total revenue: $35.00 - Top selling date: 03/25/2012")
+      expect(page).to have_content("#{@item_3.name} - Total revenue: $30.00 - Top selling date: 03/26/2012")
+      expect(page).to have_content("#{@item_5.name} - Total revenue: $10.00 - Top selling date: 03/25/2012")
     end
   end
 end
