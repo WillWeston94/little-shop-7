@@ -99,7 +99,6 @@ RSpec.describe "merchant#show" do
 
     it "see the date formatted and I see that the list is ordered from oldest to newest" do
       visit "/merchants/#{@merchant_1.id}/dashboard"
-      save_and_open_page
 
       within("#items_to_ship-#{@merchant_1.id}") do
         expect(page).to have_content(@invoice_1.created_at.strftime("%A, %B %d, %Y"))

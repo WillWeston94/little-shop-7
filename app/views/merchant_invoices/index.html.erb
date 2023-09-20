@@ -1,7 +1,7 @@
 <h1>Invoice Index</h1>
 
 <ul>
-  <% @merchant.invoices.each do |invoice| %>
+  <% @invoices.each do |invoice| %>
     <li>
     <%= link_to invoice.id, "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %>
     </li>
