@@ -23,8 +23,4 @@ class MerchantInvoicesController < ApplicationController
 
     redirect_to "/merchants/#{params[:merchant_id]}/invoices/#{params[:invoice_id]}", notice: 'Item status updated successfully.'
   end
-
-  def invoice_params
-    params.require(:invoice_item).permit(:status,:invoice_item_id)
-  end
 end

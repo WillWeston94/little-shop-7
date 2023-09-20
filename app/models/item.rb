@@ -9,9 +9,7 @@ class Item < ApplicationRecord
 
   enum status: { 'disabled' => 0, 'enabled' => 1 }
 
-  def unit_price_formatted
-    unit_price.to_f / 100
-  end
+
 
   def best_day
     Item
