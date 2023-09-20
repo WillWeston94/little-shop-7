@@ -14,8 +14,8 @@
   <%= link_to "Invoices", "/merchants/:merchant_id/invoices" %>
 </section>
 
-<h3>Ye Top 5 Cusomters, Yaharr</h3>
-<section id="top_5_customers-<%= @merchants.id %>">
+<h3>Ye Top 5 Customers, Yaharr</h3>
+<section id="top_five_customers-<%= @merchants.id %>">
   <ul>
     <% @top_5.each do |customer| %>
       <li>
@@ -23,9 +23,9 @@
       <%= customer.last_name %>
       (<%= customer.amount_of_transactions %>Transactions)
       </li>
+    <% end %>
   </ul>
 </section>
-    <% end %>
 
 <h3>Here be ye Items Ready to Ship</h3>
 <section id="items_to_ship-<%= @merchants.id %>">
@@ -33,11 +33,10 @@
     <% @items_to_ship.each do |item| %>
     <li>
       <%= item.name %>
-      
-      <%= item.created_at.strftime("%A, %B %d, %Y") %>
+      <%= link_to item.invoice_id, "/merchants/#{@merchants.id}/invoices/#{item.invoice_id}"%>
+      <%= item.invoice_created_at.strftime("%A, %B %d, %Y") %>
       <%= %>
     </li>
     <% end %>
   </ul>
 </section>
-
