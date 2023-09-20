@@ -7,10 +7,7 @@
 <section id="invoice_item_details">
   <% @specific_invoice_items.each do |invoice_item| %>
 <ul>
-  <li>ITEM NAME: <%= invoice_item.item.name %></li>
-  <li>QUANTITY: <%= invoice_item.quantity %></li>
-  <li>UNIT PRICE: <%= number_to_currency(invoice_item.unit_price / 100) %></li>
-  <li>ITEM STATUS: <%= invoice_item.status %></li>
+  <%= render partial: "invoice_items_details", locals: { invoice_item: invoice_item} %>
       <%= form_with model: invoice_item, url: merchant_invoice_update_path(@merchant, @invoice), method: :patch do |f| %>        
         <%= f.hidden_field :invoice_item_id, value: invoice_item.id %>
         <%= f.label :status %>

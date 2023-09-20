@@ -1,11 +1,7 @@
 <h1>Create an Item for <%= @merchant.name %></h1>
 
-<%= form_with url: "/merchants/#{@merchant.id}/items/create", method: :post, data: { turbo: false } do |form| %>
-  <%= form.label :name, "Name:" %>
-  <%= form.text_field :name %><br>
-  <%= form.label :description, "Description:" %>
-  <%= form.text_field :description %><br>
-  <%= form.label :unit_price, "Unit price:" %>
-  <%= form.text_field :unit_price %><br>
-  <%= form.submit "Create Item" %>
-<% end %>
+<%= render partial: '/items/form', locals: {
+                                      path: "/merchants/#{@merchant.id}/items/create",
+                                      method: :post,
+                                      button_text: 'Create Item'
+																		} %>

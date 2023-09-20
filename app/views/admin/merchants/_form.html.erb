@@ -1,0 +1,5 @@
+<%= form_for [:admin, @merchant] do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name, value: @merchant.name %>
+  <%= f.submit "Submit" %>
+<% end %>
