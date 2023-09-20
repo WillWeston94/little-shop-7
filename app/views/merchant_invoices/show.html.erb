@@ -6,19 +6,23 @@
 <p>CUSTOMER NAME: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
 </section>
 
+<section id="total_rev">
+<h2>Total Revenue: <%= number_to_currency(@invoice.total_revenue / 100) %></h2>
+</section>
 
+<section id="invoice_item_details">
   <% @specific_invoice_items.each do |invoice_item| %>
 <ul>
   <li>ITEM NAME: <%= invoice_item.item.name %></li>
   <li>QUANTITY: <%= invoice_item.quantity %></li>
-  <li>UNIT PRICE: <%= invoice_item.unit_price %></li>
+  <li>UNIT PRICE: <%= number_to_currency(invoice_item.unit_price / 100) %></li>
   <li>ITEM STATUS: <%= invoice_item.status %></li>
       <%= form_with model: invoice_item, url: merchant_invoice_update_path(@merchant, @invoice), method: :patch do |f| %>        
         <%= f.hidden_field :invoice_item_id, value: invoice_item.id %>
         <%= f.label :status %>
-        <%= f.select :status, options_for_select([['pending', 0], ['packaged', 1], ['shipped', 2]], selected: invoice_item.status) %>
+        <%= f.select :status, options_for_select([['pending', 0], ['packaged', 1], ['shipped', 2]], selected: invoice_item.status), id: "unique_select_field_#{invoice_item.id}" %>
         <%= f.submit 'Update Item Status' %>
       <% end %>
 </ul>
 <% end %>
-
+</section>

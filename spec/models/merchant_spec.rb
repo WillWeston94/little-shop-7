@@ -210,7 +210,7 @@ RSpec.describe Merchant, type: :model do
         invoice_item_2 = create(:invoice_item, item: item_2, invoice: invoice_2, status: 1)
         invoice_item_3 = create(:invoice_item, item: item_3, invoice: invoice_3, status: 1)
 
-        expect(merchant_1.ready_to_ship).to eq([item_2, item_3])
+        expect(merchant_1.ready_to_ship.to_a).to eq([item_3, item_2])
       end
     end
 end
