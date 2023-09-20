@@ -1,7 +1,4 @@
 class ItemsController < ApplicationController
-  def show
-    @item = Item.find(params[:id])
-  end
   
   def edit
     @item = Item.find(params[:id])
@@ -18,6 +15,6 @@ class ItemsController < ApplicationController
     item.save
     flash[:success] = "Item information updated successfully."
 
-    redirect_to "/items/#{item.id}"
+    redirect_to "/merchants/#{item.merchant_id}/items/#{item.id}"
   end
 end

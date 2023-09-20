@@ -26,18 +26,19 @@ RSpec.describe "Admin Merchants Index Page", type: :feature do
   end
 
   describe "merchant index list has button to disable merchant" do
-    xit "when clicked can disable a merchant" do
+    it "when clicked can disable a merchant" do
       @merchant_1 = create(:merchant)
 
       visit "/admin/merchants"
 
-      within("#enabled_merchants#{@merchant_1.name}") do
+      within("#enabled_merchants-#{@merchant_1.id}") do
         expect(page).to have_button("Disable")
-        
         click_button("Disable")
+      end
 
-        expect(current_path).to eq("/admin/merchants")
-        expect(page).to have_content("Merchant #{@merchant_1.name} disabled.")
+      expect(current_path).to eq("/admin/merchants")
+      within("#disabled_merchants-#{@merchant_1.id}") do
+        expect(page).to have_button("Enable")
       end
     end
   end

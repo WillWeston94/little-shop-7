@@ -2,7 +2,7 @@ class Admin::MerchantsController < ApplicationController
   def index
     @merchants = Merchant.all
     @top_merchants = @merchants.top_revenue
-    @enabled_merchants = Merchant.where(disabled: false)
+    @enabled_merchants = Merchant.where(disabled: [false, nil])
     @disabled_merchants = Merchant.where(disabled: true)
   end
 
@@ -21,7 +21,8 @@ class Admin::MerchantsController < ApplicationController
       flash[:success] = "Merchant information updated successfully."
       redirect_to admin_merchant_path(@merchant)
     else
-      render :edit
+      flash[:error] = "Merchant information not updated. Please fill out the entire form."
+      redirect_to edit_admin_merchant_path(@merchant)
     end
   end
 
@@ -32,7 +33,8 @@ class Admin::MerchantsController < ApplicationController
       flash[:success] = "Merchant created successfully and disabled."
       redirect_to admin_merchants_path
     else
-      render :new
+      flash[:error] = "Merchant not created. Please fill out the entire form."
+      redirect_to new_admin_merchant_path
     end
   end
   

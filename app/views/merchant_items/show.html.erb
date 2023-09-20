@@ -1,9 +1,11 @@
 <h1><%= @item.name %></h1>
+<p><%= link_to "Back to Items Index", "/merchants/#{@item.merchant_id}/items" %></p>
 
 <ul>
   <li>Name: <%= @item.name %></li>
   <li>Description: <%= @item.description %></li>
   <li>Unit price: <%= number_to_currency(@item.unit_price / 100.0) %></li>
+  <li>Merchant ID: <%= @item.merchant_id %></li>
 </ul>
 
 <%= link_to "Update Item", "/items/#{@item.id}/edit" %>

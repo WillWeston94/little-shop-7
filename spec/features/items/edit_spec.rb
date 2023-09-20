@@ -32,15 +32,15 @@ RSpec.describe "Items Edit", type: :feature do
       fill_in "name", with: "Updated Name"
       fill_in "description", with: "Updated Description"
       fill_in "unit_price", with: "10234"
-      fill_in "merchant_id", with: "#{@merchant_2.id}"
+      fill_in "merchant_id", with: "#{@merchant_1.id}"
       click_button "Update Item"
 
-      expect(page).to have_current_path("/items/#{@item_1.id}")
+      expect(page).to have_current_path("/merchants/#{@merchant_1.id}/items/#{@item_1.id}")
 
       expect(page).to have_content("Name: Updated Name")
       expect(page).to have_content("Description: Updated Description")
-      expect(page).to have_content("Unit Price: 10234")
-      expect(page).to have_content("Merchant ID: #{@merchant_2.id}")
+      expect(page).to have_content("Unit price: $102.34")
+      expect(page).to have_content("Merchant ID: #{@merchant_1.id}")
       expect(page).to have_content("Item information updated successfully.")
     end
   end

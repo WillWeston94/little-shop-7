@@ -49,4 +49,14 @@ class Merchant < ApplicationRecord
       .where(invoice_items: {status: 1})
       .order("invoices.created_at ASC")
   end
+
+  def most_popular_items
+    items
+      .joins(:invoice_items)
+      .select("items.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS item_revenue")
+      .where("invoice_items.status = ?", 1)
+      .group("items.id")
+      .order("item_revenue DESC")
+      .limit(5)
+  end
 end

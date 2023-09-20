@@ -8,7 +8,7 @@
   <ul>
     <% @top_merchants.each do |merchant| %>
       <li>
-        <p>- Total Revenue for: <%= merchant.name %> is $<%= merchant.revenue %></p>
+        <p>- Total Revenue for: <%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %> is <%= number_to_currency(merchant.revenue / 100) %></p>
         <p>- Top Selling Day for: <%= merchant.name %> is <%= merchant.top_date %></p>
       </li>
     <% end %>
@@ -19,7 +19,7 @@
   <h2>Enabled Merchants</h2>
 <ul>
   <% @enabled_merchants.each do |merchant| %>
-    <li>
+    <li id="enabled_merchants-<%= merchant.id %>"> 
     <%= link_to merchant.name, admin_merchant_path(merchant) %>
     <%= button_to (merchant.disabled ? 'Enable' : 'Disable'), disable_enable_admin_merchant_path(merchant), method: :put, data: { confirm: 'Are you sure?' } %>
     </li>
@@ -31,7 +31,7 @@
   <h2>Disabled Merchants</h2>
   <ul>
     <% @disabled_merchants.each do |merchant| %>
-    <li>
+    <li id="disabled_merchants-<%= merchant.id %>">
       <%= link_to merchant.name, admin_merchant_path(merchant) %>
       <%= button_to (merchant.disabled ? 'Enable' : 'Disable'), disable_enable_admin_merchant_path(merchant), method: :put, data: { confirm: 'Are you sure?' } %>
     </li>

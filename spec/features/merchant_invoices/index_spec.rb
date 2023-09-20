@@ -23,8 +23,8 @@ RSpec.describe "the merchant's invoice index" do
 
       visit "/merchants/#{@merchant_1.id}/invoices"
 
-      expect(page).to have_link("#{@invoice_1.id}")
-      expect(page).to have_link("#{@invoice_2.id}")
+      expect(page).to have_link("#{@invoice_1.id}", href: "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}")
+      expect(page).to have_link("#{@invoice_2.id}", href: "/merchants/#{@merchant_1.id}/invoices/#{@invoice_2.id}")
       expect(page).not_to have_link("#{@invoice_3.id}")
     end
   end

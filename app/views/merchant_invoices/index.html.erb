@@ -3,7 +3,7 @@
 <ul>
   <% @merchant.invoices.each do |invoice| %>
     <li>
-    <%= link_to invoice.id, "/merchants/:merchant_id/invoices" %>
+    <%= link_to invoice.id, "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %>
     </li>
   <% end %>
 </ul>

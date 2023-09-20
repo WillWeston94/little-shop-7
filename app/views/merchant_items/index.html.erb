@@ -2,6 +2,16 @@
 
 <p><%= link_to "Create an Item", "/merchants/#{@merchant.id}/items/new" %></p>
 
+<h2>Popular items:</h2>
+<ol id="popular-items">
+  <% @merchant.most_popular_items.each do |item| %>
+    <li><%= link_to "#{item.name}", url: "/merchants/#{@merchant.id}/items/#{item.id}" %>
+     - Total revenue: <%= number_to_currency(item.item_revenue / 100) %>
+     - Top selling date: <%= item.best_day.created_at.strftime("%m/%d/%Y") %>
+    </li>
+  <% end %>
+</ol>
+
 <h2>Enabled items:</h2>
 <ul id="status-enabled">
   <% @merchant.items.each do |item| %>
