@@ -10,7 +10,7 @@ class MerchantItemsController < ApplicationController
   def update
     item = Item.find(params[:item_id])
 
-    item.update(status: (params[:status] == "enable" ? 1 : 0))
+    item.update(status: ((params[:status] == "enable") ? 1 : 0))
     item.save
 
     redirect_to "/merchants/#{params[:merchant_id]}/items"

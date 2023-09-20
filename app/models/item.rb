@@ -7,18 +7,18 @@ class Item < ApplicationRecord
   validates :description, presence: true
   validates :unit_price, presence: true
 
-  enum status: { 'disabled' => 0, 'enabled' => 1 }
+  enum status: {"disabled" => 0, "enabled" => 1}
 
 
 
   def best_day
     Item
-    .joins(:invoices)
-    .where("items.id = ?", self.id)
-    .select("SUM(invoice_items.quantity) as items_sold, invoices.created_at::date as created_at")
-    .group("invoices.created_at::date")
-    .order("items_sold DESC, created_at DESC")
-    .limit(1)
-    .first
+      .joins(:invoices)
+      .where("items.id = ?", id)
+      .select("SUM(invoice_items.quantity) as items_sold, invoices.created_at::date as created_at")
+      .group("invoices.created_at::date")
+      .order("items_sold DESC, created_at DESC")
+      .limit(1)
+      .first
   end
 end

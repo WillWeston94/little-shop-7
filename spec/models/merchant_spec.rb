@@ -23,27 +23,27 @@ RSpec.describe Merchant, type: :model do
         merchant_1 = create(:merchant)
         merchant_2 = create(:merchant)
         merchant_3 = create(:merchant)
-  
+
         customer_1 = create(:customer)
         customer_2 = create(:customer)
         customer_3 = create(:customer)
-  
+
         item_1 = create(:item, merchant: merchant_1)
         item_2 = create(:item, merchant: merchant_2)
         item_3 = create(:item, merchant: merchant_3)
-  
+
         invoice_1 = create(:invoice, customer: customer_1, created_at: "2021-04-01 14:54:05 UTC")
         invoice_2 = create(:invoice, customer: customer_2, created_at: "2021-04-06 11:33:00 UTC")
         invoice_3 = create(:invoice, customer: customer_3, created_at: "2021-04-10 20:00:22 UTC")
-  
+
         invoice_item_1 = create(:invoice_item, item: item_1, invoice: invoice_1, quantity: 1, unit_price: 1000)
         invoice_item_2 = create(:invoice_item, item: item_2, invoice: invoice_2, quantity: 1, unit_price: 2000)
         invoice_item_3 = create(:invoice_item, item: item_3, invoice: invoice_3, quantity: 1, unit_price: 3000)
-  
+
         transaction_1 = create(:transaction, invoice: invoice_1, result: 1)
         transaction_2 = create(:transaction, invoice: invoice_2, result: 1)
         transaction_3 = create(:transaction, invoice: invoice_3, result: 1)
-  
+
         expect(merchant_1.top_date).to eq(Date.new(2021, 4, 1))
         expect(merchant_2.top_date).to eq(Date.new(2021, 4, 6))
         expect(merchant_3.top_date).to eq(Date.new(2021, 4, 10))
@@ -64,12 +64,12 @@ RSpec.describe Merchant, type: :model do
         invoice_4 = create(:invoice, customer: customer_2)
 
         item_1 = create(:item, merchant: merchant_1)
-        item_2 = create(:item, merchant: merchant_1) #
-        item_3 = create(:item, merchant: merchant_1) #
+        item_2 = create(:item, merchant: merchant_1)
+        item_3 = create(:item, merchant: merchant_1)
         item_4 = create(:item, merchant: merchant_1)
-        item_5 = create(:item, merchant: merchant_1) #
-        item_6 = create(:item, merchant: merchant_1) #
-        item_7 = create(:item, merchant: merchant_1) #
+        item_5 = create(:item, merchant: merchant_1)
+        item_6 = create(:item, merchant: merchant_1)
+        item_7 = create(:item, merchant: merchant_1)
         item_8 = create(:item, merchant: merchant_2)
         item_9 = create(:item, merchant: merchant_2)
 
@@ -88,7 +88,7 @@ RSpec.describe Merchant, type: :model do
     end
 
     describe "top_revenue" do
-      it "returns the top 5 merchants by revenue" do  
+      it "returns the top 5 merchants by revenue" do
         merchant_1 = create(:merchant)
         merchant_2 = create(:merchant)
         merchant_3 = create(:merchant)
@@ -99,7 +99,7 @@ RSpec.describe Merchant, type: :model do
         merchant_8 = create(:merchant)
         merchant_9 = create(:merchant)
         merchant_10 = create(:merchant)
-  
+
         customer_1 = create(:customer)
         customer_2 = create(:customer)
         customer_3 = create(:customer)
@@ -110,7 +110,7 @@ RSpec.describe Merchant, type: :model do
         customer_8 = create(:customer)
         customer_9 = create(:customer)
         customer_10 = create(:customer)
-  
+
         item_1 = create(:item, merchant: merchant_1)
         item_2 = create(:item, merchant: merchant_2)
         item_3 = create(:item, merchant: merchant_3)
@@ -121,7 +121,7 @@ RSpec.describe Merchant, type: :model do
         item_8 = create(:item, merchant: merchant_8)
         item_9 = create(:item, merchant: merchant_9)
         item_10 = create(:item, merchant: merchant_10)
-  
+
         invoice_1 = create(:invoice, customer: customer_1)
         invoice_2 = create(:invoice, customer: customer_2)
         invoice_3 = create(:invoice, customer: customer_3)
@@ -132,7 +132,7 @@ RSpec.describe Merchant, type: :model do
         invoice_8 = create(:invoice, customer: customer_8)
         invoice_9 = create(:invoice, customer: customer_9)
         invoice_10 = create(:invoice, customer: customer_10)
-  
+
         invoice_item_1 = create(:invoice_item, item: item_1, invoice: invoice_1, quantity: 1, unit_price: 1000)
         invoice_item_2 = create(:invoice_item, item: item_2, invoice: invoice_2, quantity: 1, unit_price: 2000)
         invoice_item_3 = create(:invoice_item, item: item_3, invoice: invoice_3, quantity: 1, unit_price: 3000)
@@ -143,7 +143,7 @@ RSpec.describe Merchant, type: :model do
         invoice_item_8 = create(:invoice_item, item: item_8, invoice: invoice_8, quantity: 1, unit_price: 8000)
         invoice_item_9 = create(:invoice_item, item: item_9, invoice: invoice_9, quantity: 1, unit_price: 9000)
         invoice_item_10 = create(:invoice_item, item: item_10, invoice: invoice_10, quantity: 1, unit_price: 10000)
-  
+
         transaction_1 = create(:transaction, invoice: invoice_1, result: 1)
         transaction_2 = create(:transaction, invoice: invoice_2, result: 1)
         transaction_3 = create(:transaction, invoice: invoice_3, result: 1)
@@ -154,64 +154,63 @@ RSpec.describe Merchant, type: :model do
         transaction_8 = create(:transaction, invoice: invoice_8, result: 1)
         transaction_9 = create(:transaction, invoice: invoice_9, result: 1)
         transaction_10 = create(:transaction, invoice: invoice_10, result: 1)
-  
+
         expect(Merchant.top_revenue).to eq([merchant_10, merchant_9, merchant_8, merchant_7, merchant_6])
       end
     end
-    
+
     describe "toggle_disabled" do
       it "can toggle the status of a merchant" do
         merchant_1 = create(:merchant)
-  
+
         expect(merchant_1.disabled).to eq(false)
-  
+
         merchant_1.toggle_disabled
-  
+
         expect(merchant_1.disabled).to eq(true)
       end
     end
-  
+
     describe "revenue" do
       it "can return the total revenue for a merchant" do
         merchant_1 = create(:merchant)
-  
+
         customer_1 = create(:customer)
-  
+
         item_1 = create(:item, merchant: merchant_1, unit_price: 1000)
         item_2 = create(:item, merchant: merchant_1, unit_price: 2000)
-  
+
         invoice_1 = create(:invoice, customer: customer_1)
-  
+
         invoice_item_1 = create(:invoice_item, item: item_1, invoice: invoice_1, quantity: 1, unit_price: 1000)
         invoice_item_2 = create(:invoice_item, item: item_2, invoice: invoice_1, quantity: 2, unit_price: 2000)
-  
+
         transaction_1 = create(:transaction, invoice: invoice_1)
-  
+
         expect(merchant_1.revenue).to eq(5000)
       end
     end
-  
+
     describe "ready_to_ship" do
       it "returns the items ready to ship for a merchant" do
         merchant_1 = create(:merchant)
-  
+
         customer_1 = create(:customer)
-  
+
         item_1 = create(:item, merchant: merchant_1)
         item_2 = create(:item, merchant: merchant_1)
         item_3 = create(:item, merchant: merchant_1)
-  
+
         invoice_1 = create(:invoice, customer: customer_1, created_at: "2021-04-01")
         invoice_2 = create(:invoice, customer: customer_1, created_at: "2021-05-01")
         invoice_3 = create(:invoice, customer: customer_1, created_at: "2021-06-01")
-  
+
         invoice_item_1 = create(:invoice_item, item: item_1, invoice: invoice_1, status: 0)
         invoice_item_2 = create(:invoice_item, item: item_2, invoice: invoice_2, status: 1)
         invoice_item_3 = create(:invoice_item, item: item_3, invoice: invoice_3, status: 1)
-  
+
         expect(merchant_1.ready_to_ship.to_a).to include(item_2, item_3)
       end
     end
   end
 end
-

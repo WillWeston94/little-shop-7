@@ -37,7 +37,7 @@ class Admin::MerchantsController < ApplicationController
       redirect_to new_admin_merchant_path
     end
   end
-  
+
   def new
     @merchant = Merchant.new
   end
@@ -47,10 +47,10 @@ class Admin::MerchantsController < ApplicationController
     @merchant.toggle_disabled
     @merchant.save
     notice = @merchant.disabled ? "Merchant #{@merchant.name} disabled." : "Merchant #{@merchant.name} enabled."
-    redirect_to '/admin/merchants', notice: notice
+    redirect_to "/admin/merchants", notice: notice
   end
 
-  private 
+  private
 
   def merchant_params
     params.require(:merchant).permit(:name)

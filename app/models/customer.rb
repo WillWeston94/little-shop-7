@@ -7,15 +7,15 @@ class Customer < ApplicationRecord
 
   def self.order_customers_by_transactions
     joins(:transactions)
-      .where(transactions: { result: 1 })
-      .group('customers.id, customers.first_name, customers.last_name')
-      .order('COUNT(transactions.id) DESC')
+      .where(transactions: {result: 1})
+      .group("customers.id, customers.first_name, customers.last_name")
+      .order("COUNT(transactions.id) DESC")
       .limit(5)
   end
 
   def amount_of_transactions
     invoices.joins(:transactions)
-      .where(transactions: { result: 1 })
+      .where(transactions: {result: 1})
       .count
   end
 end

@@ -53,8 +53,8 @@ RSpec.describe "Admin Merchants Index Page", type: :feature do
       visit "/admin/merchants"
     end
 
-      it "can list all enabled merchants and all disabled merchants" do
-        within("#enabled_merchants") do
+    it "can list all enabled merchants and all disabled merchants" do
+      within("#enabled_merchants") do
         expect(page).to have_content(@merchant_1.name)
         expect(page).to have_content(@merchant_2.name)
         expect(page).to_not have_content(@merchant_3.name)

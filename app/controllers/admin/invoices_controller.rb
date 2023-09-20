@@ -7,7 +7,7 @@ class Admin::InvoicesController < ApplicationController
     @invoice = Invoice.find(params[:id])
   end
 
-  def update 
+  def update
     @invoice = Invoice.find(params[:invoice_id])
 
     new_status = params[:invoice][:status]

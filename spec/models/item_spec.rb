@@ -28,24 +28,22 @@ RSpec.describe Item, type: :model do
   
     describe "ready_to_ship" do
       it "can display items with a status of 'packaged'" do
-        
       end
     end
 
     describe "#best_day" do
       before(:each) do
         @merchant_1 = create(:merchant)
-    
+
         @customer_1 = create(:customer)
-    
+
         @invoice_1 = create(:invoice, customer: @customer_1, created_at: "2012-03-25 09:54:09 UTC")
         @invoice_2 = create(:invoice, customer: @customer_1, created_at: "2012-03-26 09:54:09 UTC")
         @invoice_3 = create(:invoice, customer: @customer_1, created_at: "2012-03-25 10:54:09 UTC")
 
-    
         @item_1 = create(:item, merchant: @merchant_1)
         @item_2 = create(:item, merchant: @merchant_1)
-    
+
         @invoice_item_1 = create(:invoice_item, item: @item_1, invoice: @invoice_1, quantity: 1, unit_price: 500, status: 1)
         @invoice_item_4 = create(:invoice_item, item: @item_1, invoice: @invoice_3, quantity: 1, unit_price: 500, status: 1)
         @invoice_item_5 = create(:invoice_item, item: @item_1, invoice: @invoice_2, quantity: 1, unit_price: 500, status: 1)

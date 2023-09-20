@@ -2,20 +2,18 @@ require "rails_helper"
 
 RSpec.describe "the admin index" do
   it "displays a header at the top of the dashboard" do
-    
     visit "/admin"
 
     expect(page).to have_content("Admin Dashboard")
-  
   end
 
   it "has links to the admin merchant's index and the admin invoices index" do
     visit "/admin"
-    
+
     within("#admin_merchants_index") do
       expect(page).to have_link("Merchants")
     end
-    
+
     within("#admin_invoices_index") do
       expect(page).to have_link("Invoices")
     end
@@ -28,7 +26,6 @@ RSpec.describe "the admin index" do
     customer_4 = create(:customer)
     customer_5 = create(:customer)
     customer_6 = create(:customer)
-    
 
     invoice_1 = create(:invoice, customer: customer_1)
     invoice_2 = create(:invoice, customer: customer_2)
@@ -43,7 +40,7 @@ RSpec.describe "the admin index" do
     transactions_for_invoice_4 = create_list(:transaction, 1, invoice: invoice_4)
     transactions_for_invoice_5 = create_list(:transaction, 2, invoice: invoice_5)
     transactions_for_invoice_6 = create_list(:transaction, 3, invoice: invoice_6)
-    
+
     visit "/admin"
 
     expect(customer_3.first_name).to appear_before(customer_2.first_name)
@@ -105,5 +102,4 @@ RSpec.describe "the admin index" do
 
     expect(invoice_3.created_at.strftime("%A, %B %d, %Y")).to appear_before(invoice_1.created_at.strftime("%A, %B %d, %Y"))
   end
-
 end
