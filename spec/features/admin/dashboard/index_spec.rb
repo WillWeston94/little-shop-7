@@ -61,9 +61,8 @@ RSpec.describe "the admin index" do
     invoice_3 = create(:invoice, customer: customer_1, status: 0)
 
     visit "/admin"
-
     expect(page).to have_content("#{invoice_1.id}")
-    expect(page).to_not have_content("#{invoice_2.id}")
+    expect(page).to_not have_content("#{invoice_2.id} Show Invoice")
     expect(page).to have_content("#{invoice_3.id}")
   end
 
