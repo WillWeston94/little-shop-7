@@ -7,11 +7,11 @@
 
 <%= @merchants.name %>'s Items: 
 <section id="items_index-<%= @merchants.id %>">
-  <%= link_to "Items", "/merchants/:merchant_id/items" %>
+  <%= link_to "Items", "/merchants/#{@merchants.id}/items" %>
 </section>
 
 <section id="invoices_index-<%= @merchants.id %>">
-  <%= link_to "Invoices", "/merchants/:merchant_id/invoices" %>
+  <%= link_to "Invoices", "/merchants/#{@merchants.id}/invoices" %>
 </section>
 
 <h3>Ye Top 5 Customers, Yaharr</h3>
