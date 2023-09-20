@@ -77,11 +77,16 @@ RSpec.describe "the admin invoices show page" do
           invoice_item_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice.id, status: 1, quantity: 1, unit_price: 1)
 
           visit "/admin/invoices/#{invoice.id}"
-          save_and_open_page
-          within("#invoice_details") do
 
-          expect(page).to have_select("invoice_status", selected: 1)
+          within("#invoice_details") do
+            expect(page).to have_select("invoice_status", selected: invoice.status)
+            page.select("completed")
+            click_button("Update Invoice Status")
           end
+
+          expect(page).to have_current_path("/admin/invoices/#{invoice.id}")
+
+          expect(page).to have_content("STATUS: completed")
         end
       end
     end

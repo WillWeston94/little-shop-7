@@ -9,8 +9,8 @@ class Admin::InvoicesController < ApplicationController
 
   def update 
     @invoice = Invoice.find(params[:invoice_id])
-
-    new_status = params[:invoice][:status].to_i
+    require 'pry';binding.pry
+    new_status = params[:invoice][:status]
     @invoice.update(status: new_status)
     @invoice.save
 
