@@ -1,7 +1,14 @@
 <section id="invoice_details">
 <h1>Invoice </h1>
 <p>ID: <%= @invoice.id %></p>
-<p>STATUS: <%= @invoice.status %></p>
+
+<%= form_with url: "/admin/invoices/#{@invoice.id}", method: :patch, data:{turbo: false} do |form| %>
+<%= form.label :status, "STATUS:" %>
+  <%= form.select :status, ["in progress", "completed", "cancelled"], selected: @invoice.status %>
+  <%= form.submit "Update Invoice Status" %>
+<% end %>
+
+
 <p>CREATED AT: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
 <p>CUSTOMER NAME: <%= @invoice.customer.first_name %> <%= @invoice.customer.last_name %></p>
 </section>

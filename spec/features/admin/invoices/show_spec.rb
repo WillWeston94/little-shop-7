@@ -22,9 +22,7 @@ RSpec.describe "the admin invoices show page" do
       item_1 = create(:item, merchant_id: merchant.id)
       item_2 = create(:item, merchant_id: merchant.id)
       invoice = Invoice.create!(status: 0, customer_id: customer.id)
-
       invoice_item_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice.id, status: 1, quantity: 2, unit_price: 2)
-
       invoice_item_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice.id, status: 1, quantity: 1, unit_price: 1)
 
       visit "/admin/invoices/#{invoice.id}"
@@ -50,9 +48,7 @@ RSpec.describe "the admin invoices show page" do
       item_1 = create(:item, merchant_id: merchant.id)
       item_2 = create(:item, merchant_id: merchant.id)
       invoice = Invoice.create!(status: 0, customer_id: customer.id)
-
       invoice_item_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice.id, status: 1, quantity: 2, unit_price: 2)
-
       invoice_item_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice.id, status: 1, quantity: 1, unit_price: 1)
 
       visit "/admin/invoices/#{invoice.id}"
@@ -65,20 +61,30 @@ RSpec.describe "the admin invoices show page" do
   describe "US 36 admin invoice show page" do
     describe "I see the invoice status is a select field and I see that the invoice's current status is selected when I click this select field" do
       describe "then I can select a new status for the Invoice, and next to the select field I see a button to 'Update Invoice Status'" do
-        xit "When I click this button I am taken back to the admin invoice show page and I see that my Invoice's status has now been updated" do
+        it "When I click this button I am taken back to the admin invoice show page and I see that my Invoice's status has now been updated" do
           customer = create(:customer)
           merchant = create(:merchant)
           item_1 = create(:item, merchant_id: merchant.id)
           item_2 = create(:item, merchant_id: merchant.id)
           invoice = Invoice.create!(status: 0, customer_id: customer.id)
-
           invoice_item_1 = InvoiceItem.create!(item_id: item_1.id, invoice_id: invoice.id, status: 1, quantity: 2, unit_price: 2)
-
           invoice_item_2 = InvoiceItem.create!(item_id: item_2.id, invoice_id: invoice.id, status: 1, quantity: 1, unit_price: 1)
 
           visit "/admin/invoices/#{invoice.id}"
 
-          expect(page).to have_select("Invoice Status", selected: @invoice.status)
+          save_and_open_page
+
+          expect(page).to have_content("STATUS")
+          expect(page).to have_select("status", selected: "in progress")
+
+          select "completed", from: "status"
+
+          expect(page).to have_button("Update Invoice Status")
+
+          click_button "Update Invoice Status"
+
+          expect(current_path).to eq("/admin/invoices/#{invoice.id}")
+          expect(page).to have_select("status", selected: "completed")
         end
       end
     end
