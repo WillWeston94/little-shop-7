@@ -1,11 +1,15 @@
 <h1> Merchants Bulk Discounts </h1>
 
+  <section id="create_discount">
+    <li> <%= link_to "Create New Discount", "/merchants/#{@merchant.id}/bulk_discounts/new" %>
+  </section>
+
 <section class="bulk_discounts">
 <ul>
 <% @merchant.bulk_discounts.each do |bulk_discount| %>
   <li> Discount: <%= bulk_discount.percentage_discount %>% </li>
   <li> Off: <%= bulk_discount.threshold %> Items</li>
-  <li> <%= link_to "Discount Show Page", "/merchants/#{@merchant.id}/bulk_discounts/#{bulk_discount.id}" %>
+  <p> <%= link_to "Discount Show Page", "/merchants/#{@merchant.id}/bulk_discounts/#{bulk_discount.id}" %> <p>
 </ul>
 <% end %>
 </section>
