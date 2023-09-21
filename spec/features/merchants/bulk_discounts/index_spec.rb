@@ -19,15 +19,15 @@ RSpec.describe "Bulk Discounts Index", type: :feature do
       within(".bulk_discounts") do
         expect(page).to have_content(@bulk_discount_1.percentage_discount.to_s)
         expect(page).to have_content(@bulk_discount_1.threshold.to_s)
-        expect(page).to have_link("Discount Show Page") #make it dynamic using href and instances?
+        expect(page).to have_link(@bulk_discount_1.id) #make it dynamic using href and instances?
 
         expect(page).to have_content(@bulk_discount_2.percentage_discount.to_s)
         expect(page).to have_content(@bulk_discount_2.threshold.to_s)
-        expect(page).to have_link("Discount Show Page")
+        expect(page).to have_link(@bulk_discount_2.id) 
 
         expect(page).to_not have_content(@bulk_discount_3.percentage_discount.to_s)
         expect(page).to_not have_content(@bulk_discount_3.threshold.to_s)
-        expect(page).to_not have_link("Discount Show Page") #Test fails because this exists on page and the discount_id needs to be made dynamic
+        expect(page).to_not have_link(@bulk_discount_3.id)
       end
     end
   end
