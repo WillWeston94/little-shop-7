@@ -1,6 +1,5 @@
 <%= render partial: "admin/invoices/invoice_details", locals: { invoice: @invoice} %>
 
-
 <section id="invoice_status_form">
   <%= form_with model: @invoice, url: admin_invoice_update_path(@invoice), method: :patch do |f| %>        
   <%= f.hidden_field :invoice_id, value: @invoice.id %>

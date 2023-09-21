@@ -28,6 +28,10 @@ Rails.application.routes.draw do
     resources :invoices, only: [:show]
   end
 
+  resources :merchants do
+    resources :bulk_discounts
+  end
+
   get "/admin/invoices", to: "admin/invoices#index"
   get "/admin/invoices/:id", to: "admin/invoices#show"
 end

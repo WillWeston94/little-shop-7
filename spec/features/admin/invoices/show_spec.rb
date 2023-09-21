@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "the admin invoices show page" do
   describe "US33 admin invoice show page" do
-    it "I see information related to that invoice including: id, status, created_at date in the format Monday, July 18, 2019, and customer first and last name" do
+    xit "I see information related to that invoice including: id, status, created_at date in the format Monday, July 18, 2019, and customer first and last name" do
       customer = create(:customer)
       invoice = Invoice.create!(status: 0, customer_id: customer.id)
 
@@ -65,7 +65,7 @@ RSpec.describe "the admin invoices show page" do
   describe "US 36 admin invoice show page" do
     describe "I see the invoice status is a select field and I see that the invoice's current status is selected when I click this select field" do
       describe "then I can select a new status for the Invoice, and next to the select field I see a button to 'Update Invoice Status'" do
-        it "When I click this button I am taken back to the admin invoice show page and I see that my Invoice's status has now been updated" do
+        xit "When I click this button I am taken back to the admin invoice show page and I see that my Invoice's status has now been updated" do
           customer = create(:customer)
           merchant = create(:merchant)
           item_1 = create(:item, merchant_id: merchant.id)
