@@ -4,6 +4,10 @@
 <h2>Total Revenue: <%= number_to_currency(@invoice.total_revenue / 100) %></h2>
 </section>
 
+<section id="discount_rev">
+<h2>Discounted Revenue: <%= number_to_currency(@invoice.total_discounted_revenue / 100) %></h2>
+</section>
+
 <section id="invoice_item_details">
   <% @specific_invoice_items.each do |invoice_item| %>
     <section id="invoice_item-<%= invoice_item.id %>">

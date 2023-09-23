@@ -16,9 +16,16 @@ Rails.application.routes.draw do
   get "/items/:id/edit", to: "items#edit"
   patch "/items/:id", to: "items#update"
 
-  post "/merchants/:merchant_id/bulk_discounts", to: "bulk_discounts#create", as: "create_merchant_bulk_discount"
+  resources :merchants, only: [] do
+    resources :bulk_discounts, controller: 'bulk_discounts'
+  end
 
-  
+  # post "/merchants/:merchant_id/bulk_discounts", to: "bulk_discounts#create", as: "create_merchant_bulk_discount"
+  # get "/merchants/:merchant_id/bulk_discounts/:id/edit", to: "bulk_discounts#edit", as: "edit_merchant_bulk_discount"
+  patch "/merchants/:merchant_id/bulk_discounts/:id", to: "bulk_discounts#update", as: "update_merchant_bulk_discount"
+
+  delete "/merchants/:merchant_id/bulk_discounts/:id", to: "bulk_discounts#destroy", as: "delete_merchant_bulk_discount"
+
   namespace :admin, path: "/admin" do
     get "", to: "dashboard#index", as: "dashboard"
 
@@ -29,10 +36,6 @@ Rails.application.routes.draw do
     end
 
     resources :invoices, only: [:show]
-  end
-
-  resources :merchants do
-    resources :bulk_discounts
   end
 
   get "/admin/invoices", to: "admin/invoices#index"

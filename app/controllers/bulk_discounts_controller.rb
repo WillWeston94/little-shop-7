@@ -5,6 +5,7 @@ class BulkDiscountsController < ApplicationController
   end
 
   def show
+    @merchant = Merchant.find(params[:merchant_id])
     @bulk_discount = BulkDiscount.find(params[:id])
   end
 
@@ -22,6 +23,31 @@ class BulkDiscountsController < ApplicationController
     else
       flash[:error] = "Please fill in all fields"
       render :new
+    end
+  end
+
+  def destroy
+    @merchant = Merchant.find(params[:merchant_id])
+    @bulk_discount = BulkDiscount.find(params[:id])
+    @bulk_discount.destroy
+
+    redirect_to "/merchants/#{params[:merchant_id]}/bulk_discounts", notice: "Bulk discount deleted successfully"
+  end
+
+  def edit
+    @merchant = Merchant.find(params[:merchant_id])
+    @bulk_discount = BulkDiscount.find(params[:id])
+  end
+
+  def update
+    @merchant = Merchant.find(params[:merchant_id])
+    @bulk_discount = BulkDiscount.find(params[:id])
+
+    if @bulk_discount.update(bulk_discount_params)
+      redirect_to "/merchants/#{params[:merchant_id]}/bulk_discounts", notice: "Bulk discount updated successfully"
+    else
+      flash[:error] = "Discount must be between 0.01 and 0.75"
+      render :edit
     end
   end
 
