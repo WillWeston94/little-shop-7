@@ -2,6 +2,7 @@ class InvoiceItem < ApplicationRecord
   belongs_to :item
   has_one :merchant, through: :item
   belongs_to :invoice
+  
 
   validates :quantity, presence: true
   validates :unit_price, presence: true
@@ -15,7 +16,9 @@ class InvoiceItem < ApplicationRecord
 
   def discounted_revenue
     base_price = unit_price
-    bulk_discounts = merchant.bulk_discounts.where("threshold <= ?", quantity).order(percentage_discount: :desc)
+    bulk_discounts = merchant.bulk_discounts
+                    .where("threshold <= ?", quantity)
+                    .order(percentage_discount: :desc)
 
     if bulk_discounts.any?
       discount = bulk_discounts.first.percentage_discount
