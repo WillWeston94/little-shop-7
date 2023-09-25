@@ -19,6 +19,14 @@
               <%= f.select :status, ['pending', 'packaged', 'shipped'], selected: invoice_item.status %>
               <%= f.submit 'Update Item Status' %>
             <% end %>
+
+            <% if invoice_item.bulk_discount.present? %>
+              <p>
+                <%= link_to "View Applied Discount", merchant_bulk_discount_path(@merchant, invoice_item.bulk_discount) %>
+              </p>
+              <% else %>
+                <p> No Discount Applied </p>
+            <% end %>
       </ul>
     </section>
   <% end %>

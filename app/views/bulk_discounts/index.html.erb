@@ -10,6 +10,8 @@
   <li> Discount: <%= bulk_discount.percentage_discount * 100 %>% </li>
   <li> Off: <%= bulk_discount.threshold %> Items</li>
   <p> <%= link_to "Discount Show Page", "/merchants/#{@merchant.id}/bulk_discounts/#{bulk_discount.id}" %> </p>
+  <p>   <%= link_to "Delete Discount", "/merchants/#{@merchant.id}/bulk_discounts/#{bulk_discount.id}",
+              method: :delete, class: "button-link", data: { confirm: "Are you sure you want to delete this discount?" } %>
 <% end %>
 </ul>
 </section>
