@@ -9,16 +9,6 @@
   <% end %>
 </section>
 
-<ul>
-<p id="invoice_items">Invoice Items: 
-  <% @invoice.invoice_items.each do |invoice_item| %>
-  <%= render partial: "/merchant_invoices/invoice_items_details", locals: { invoice_item: invoice_item} %>
-    <br>
-  <% end %>
-</ul>
-
-</p>
-
 <section id="total_revenue">
   <h2>Revenue Generated</h2>
   <p>Total Revenue for Invoice <%= @invoice.id %> is: <%= number_to_currency(@invoice.total_revenue / 100) %></p>
@@ -27,6 +17,14 @@
 
 <section id="discounted_revenue">
   <h2>Discounted Revenue</h2>
-  <p>Discounted Revenue for Invoice <%= @invoice.id %> is: <%= number_to_currency(@invoice.total_discounted_revenue / 100) %></p>
+  <p>Discounted Revenue for Invoice <%= @invoice.id %> is: <%= number_to_currency(@invoice.total_discounted_revenue / 100, ) %></p>
 </section>
 
+
+<ul>
+<p id="invoice_items">Invoice Items: 
+  <% @invoice.invoice_items.each do |invoice_item| %>
+  <%= render partial: "/merchant_invoices/invoice_items_details", locals: { invoice_item: invoice_item} %>
+    <br>
+  <% end %>
+</ul>

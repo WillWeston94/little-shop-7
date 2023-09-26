@@ -8,10 +8,12 @@ RSpec.describe "the admin invoices show page" do
 
       visit "/admin/invoices/#{invoice.id}"
 
-      expect(page).to have_content("ID: #{invoice.id}")
-      expect(page).to have_content("STATUS: #{invoice.status}")
-      expect(page).to have_content("CREATED AT: #{invoice.created_at.strftime("%A, %B %d, %Y")}")
-      expect(page).to have_content("CUSTOMER NAME: #{customer.first_name} #{customer.last_name}")
+      within "#invoice_status_form" do
+        expect(page).to have_content("ID: #{invoice.id}")
+        expect(page).to have_content("STATUS: #{invoice.status}")
+        expect(page).to have_content("CREATED AT: #{invoice.created_at.strftime("%A, %B %d, %Y")}")
+        expect(page).to have_content("CUSTOMER NAME: #{customer.first_name} #{customer.last_name}")
+      end
     end
   end
 

@@ -30,4 +30,10 @@ class InvoiceItem < ApplicationRecord
 
     quantity * discounted_price
   end
+
+  def discounted_item
+    merchant.bulk_discounts.where("threshold <= ?", quantity)
+                                .order(percentage_discount: :desc)
+                                .first
+  end
 end

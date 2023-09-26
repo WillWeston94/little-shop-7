@@ -2,7 +2,7 @@
 
 <%= form_with model: @bulk_discount, url: merchant_bulk_discounts_path(@merchant), local: true do |form| %>
   <%= form.label :percentage_discount %>
-  <%= form.number_field :percentage_discount %>
+  <%= form.number_field :percentage_discount, step: 0.01 %>
   <br>
   <%= form.label :threshold %>
   <%= form.number_field :threshold %>

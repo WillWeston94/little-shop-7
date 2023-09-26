@@ -20,9 +20,9 @@
               <%= f.submit 'Update Item Status' %>
             <% end %>
 
-            <% if invoice_item.bulk_discount.present? %>
+            <% if invoice_item.discounted_item %>
               <p>
-                <%= link_to "View Applied Discount", merchant_bulk_discount_path(@merchant, invoice_item.bulk_discount) %>
+                <%= link_to "View Applied Discount", merchant_bulk_discount_path(@merchant, invoice_item.discounted_item) %>
               </p>
               <% else %>
                 <p> No Discount Applied </p>
