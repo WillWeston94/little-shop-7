@@ -14,11 +14,7 @@
   <%= link_to "Invoices", "/merchants/#{@merchants.id}/invoices" %>
 </section>
 
-<section id="discount_index-<%= @merchants.id %>">
-  <%= link_to "View Bulk Discounts", "/merchants/#{@merchants.id}/bulk_discounts" %>
-</section>
-
-<h3>Merchant Dashboard</h3>
+<h3>Ye Top 5 Customers, Yaharr</h3>
 <section id="top_five_customers-<%= @merchants.id %>">
   <ul>
     <% @top_5.each do |customer| %>
@@ -31,7 +27,7 @@
   </ul>
 </section>
 
-<h3>Items ready to ship</h3>
+<h3>Here be ye Items Ready to Ship</h3>
 <section id="items_to_ship-<%= @merchants.id %>">
   <ul>
     <% @items_to_ship.each do |item| %>
