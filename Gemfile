@@ -60,6 +60,8 @@ group :development, :test do
   gem "orderly"
   gem "faker"
   gem "factory_bot_rails"
+  gem 'httparty'
+  gem 'json'
 end
 
 group :development do

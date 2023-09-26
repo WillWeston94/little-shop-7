@@ -10,15 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_18_214959) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_26_150528) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bulk_discounts", force: :cascade do |t|
+    t.bigint "merchant_id", null: false
+    t.decimal "percentage_discount", precision: 4, scale: 2
+    t.integer "threshold"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["merchant_id"], name: "index_bulk_discounts_on_merchant_id"
+  end
 
   create_table "customers", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "holiday_discounts", force: :cascade do |t|
+    t.date "date"
+    t.string "name"
+    t.decimal "percentage_discount"
+    t.integer "threshold"
+    t.bigint "merchant_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["merchant_id"], name: "index_holiday_discounts_on_merchant_id"
   end
 
   create_table "invoice_items", force: :cascade do |t|
@@ -68,6 +88,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_18_214959) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "bulk_discounts", "merchants"
+  add_foreign_key "holiday_discounts", "merchants"
   add_foreign_key "invoice_items", "invoices"
   add_foreign_key "invoice_items", "items"
   add_foreign_key "invoices", "customers"
