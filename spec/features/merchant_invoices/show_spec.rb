@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "the merchant invoices show page" do
-  xit "I see information related to that invoice including: id, status, created_at date, and customer first and last name" do
+  it "I see information related to that invoice including: id, status, created_at date, and customer first and last name" do
     @merchant_1 = create(:merchant)
     @customer_1 = create(:customer)
 
@@ -100,37 +100,6 @@ RSpec.describe "the merchant invoices show page" do
 
         within("#invoice_item-#{@invoice_item_1.id}") do
           expect(page).to have_content("ITEM STATUS: shipped")
-        end
-      end
-    end
-
-    describe "when I visit the merchant invoice show page" do
-      it "I see a section with the total discounted revenue" do
-        @merchant_1 = create(:merchant)
-        @merchant_2 = create(:merchant)
-        @customer_1 = create(:customer)
-    
-        @item_1 = create(:item, merchant_id: @merchant_1.id)
-        @item_2 = create(:item, merchant_id: @merchant_2.id)
-        @item_3 = create(:item, merchant_id: @merchant_1.id)
-    
-        @invoice_1 = create(:invoice, customer_id: @customer_1.id)
-  
-        @invoice_item_1 = create(:invoice_item, item_id: @item_1.id, invoice_id: @invoice_1.id, quantity: 2, unit_price: 10, status: 1)
-        @invoice_item_2 = create(:invoice_item, item_id: @item_2.id, invoice_id: @invoice_1.id, unit_price: 20, status: 1)
-        @invoice_item_3 = create(:invoice_item, item_id: @item_3.id, invoice_id: @invoice_1.id, unit_price: 30, status: 1)
-  
-        @bulk_discount_1 = create(:bulk_discount, merchant_id: @merchant_1.id, percentage_discount: 0.10, threshold: 2)
-        @bulk_discount_2 = create(:bulk_discount, merchant_id: @merchant_1.id, percentage_discount: 0.20, threshold: 3)
-  
-        visit "/merchants/#{@merchant_1.id}/invoices/#{@invoice_1.id}"
-
-        within("#total_rev") do
-          expect(page).to have_content("Total Revenue: $0.70")
-        end
-
-        within("#discount_rev") do
-          expect(page).to have_content("Discounted Revenue: $0.68")
         end
       end
     end

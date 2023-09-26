@@ -4,10 +4,6 @@
 <h2>Total Revenue: <%= number_to_currency(@invoice.total_revenue / 100) %></h2>
 </section>
 
-<section id="discount_rev">
-<h2>Discounted Revenue: <%= number_to_currency(@invoice.total_discounted_revenue / 100) %></h2>
-</section>
-
 <section id="invoice_item_details">
   <% @specific_invoice_items.each do |invoice_item| %>
     <section id="invoice_item-<%= invoice_item.id %>">
@@ -18,14 +14,6 @@
               <%= f.label :status %>
               <%= f.select :status, ['pending', 'packaged', 'shipped'], selected: invoice_item.status %>
               <%= f.submit 'Update Item Status' %>
-            <% end %>
-
-            <% if invoice_item.discounted_item %>
-              <p>
-                <%= link_to "View Applied Discount", merchant_bulk_discount_path(@merchant, invoice_item.discounted_item) %>
-              </p>
-              <% else %>
-                <p> No Discount Applied </p>
             <% end %>
       </ul>
     </section>

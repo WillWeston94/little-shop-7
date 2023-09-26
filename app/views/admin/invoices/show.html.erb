@@ -1,5 +1,6 @@
 <%= render partial: "admin/invoices/invoice_details", locals: { invoice: @invoice} %>
 
+
 <section id="invoice_status_form">
   <%= form_with model: @invoice, url: admin_invoice_update_path(@invoice), method: :patch do |f| %>        
   <%= f.hidden_field :invoice_id, value: @invoice.id %>
@@ -9,18 +10,6 @@
   <% end %>
 </section>
 
-<section id="total_revenue">
-  <h2>Revenue Generated</h2>
-  <p>Total Revenue for Invoice <%= @invoice.id %> is: <%= number_to_currency(@invoice.total_revenue / 100) %></p>
-</section>
-
-
-<section id="discounted_revenue">
-  <h2>Discounted Revenue</h2>
-  <p>Discounted Revenue for Invoice <%= @invoice.id %> is: <%= number_to_currency(@invoice.total_discounted_revenue / 100, ) %></p>
-</section>
-
-
 <ul>
 <p id="invoice_items">Invoice Items: 
   <% @invoice.invoice_items.each do |invoice_item| %>
@@ -28,3 +17,12 @@
     <br>
   <% end %>
 </ul>
+
+</p>
+
+<section id="total_revenue">
+  <h2>Revenue Generated</h2>
+  <p>Total Revenue for Invoice <%= @invoice.id %> is: <%= number_to_currency(@invoice.total_revenue / 100) %></p>
+</section>
+
+

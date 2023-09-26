@@ -1,8 +1,0 @@
-<h1> Bulk Discount Show page </h1>
-
-<section class="bulk_discounts_show">
-  <ul>
-    <li> Discount: <%= @bulk_discount.percentage_discount * 100 %>% </li>
-    <li> Off: <%= @bulk_discount.threshold %> Items</li>
-    <p> <%= link_to "Edit Discount", edit_merchant_bulk_discount_path(@merchant, @bulk_discount) %> </p>
-  </ul>
