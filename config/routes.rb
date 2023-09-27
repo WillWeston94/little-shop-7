@@ -23,8 +23,8 @@ Rails.application.routes.draw do
     resources :holiday_discounts, controller: 'holiday_discounts'
   end
 
-  # post "/merchants/:merchant_id/bulk_discounts", to: "bulk_discounts#create", as: "create_merchant_bulk_discount"
-  # get "/merchants/:merchant_id/bulk_discounts/:id/edit", to: "bulk_discounts#edit", as: "edit_merchant_bulk_discount"
+  post "/merchants/:merchant_id/bulk_discounts", to: "bulk_discounts#create", as: "create_merchant_bulk_discount"
+  get "/merchants/:merchant_id/bulk_discounts/:id/edit", to: "bulk_discounts#edit", as: "edit_merchant_bulk_discount"
   patch "/merchants/:merchant_id/bulk_discounts/:id", to: "bulk_discounts#update", as: "update_merchant_bulk_discount"
 
   namespace :admin, path: "/admin" do
