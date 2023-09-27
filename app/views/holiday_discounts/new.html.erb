@@ -1,0 +1,11 @@
+<h1> Create a New Holiday Discount </h1>
+
+<%= form_with model: @holiday_discount, url: merchant_holiday_discounts_path(@merchant), local: true do |form| %>
+  <%= form.label :percentage_discount %>
+  <%= form.number_field :percentage_discount, step: 0.01 %>
+  <br>
+  <%= form.label :threshold %>
+  <%= form.number_field :threshold %>
+  <br>
+  <%= form.submit "Create New Holiday Discount"%>
+<% end %>

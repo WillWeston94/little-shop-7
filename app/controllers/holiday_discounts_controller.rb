@@ -16,9 +16,15 @@ class HolidayDiscountsController < ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
     @holiday_discount = @merchant.holiday_discounts.new(holiday_discount_params)
     if @holiday_discount.save
-      redirect_to "/merchants/#{params[:merchant_id]}/holiday_discounts", notice: "Holiday discount created successfully"
+      redirect_to "/merchants/#{params[:merchant_id]}/bulk_discounts", notice: "Holiday discount created successfully"
     else
       render :new
     end
+  end
+
+  private 
+
+  def holiday_discount_params
+    params.require(:holiday_discount).permit(:percentage_discount, :threshold)
   end
 end
