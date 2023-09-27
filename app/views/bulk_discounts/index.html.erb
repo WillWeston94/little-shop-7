@@ -4,13 +4,13 @@
     <li> <%= link_to "Create New Discount", "/merchants/#{@merchant.id}/bulk_discounts/new" %> </li>
   </section>
 
-<section class="bulk_discounts-"#{bulk_discount.id}>
+<section class="bulk_discounts-"#{@merchant.id}>
 <ul>
 <% @merchant.bulk_discounts.each do |bulk_discount| %>
   <li> Discount: <%= bulk_discount.percentage_discount * 100 %>% </li>
   <li> Off: <%= bulk_discount.threshold %> Items</li>
   <p> <%= link_to "Discount Show Page", "/merchants/#{@merchant.id}/bulk_discounts/#{bulk_discount.id}" %> </p>
-  <p> <%= button_to "Delete Discount", delete_merchant_bulk_discount_path(@merchant, bulk_discount), method: :delete, data: { confirm: "Are you sure?" } %>
+  <p> <%= button_to "Delete Discount", delete_merchant_bulk_discount_path(@merchant, bulk_discount), method: :delete, data: { confirm: "Are you sure?" }, class: "delete-discount-button" %>
 
 <% end %>
 </ul>

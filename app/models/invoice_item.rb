@@ -27,7 +27,6 @@ class InvoiceItem < ApplicationRecord
     else
       discounted_price = base_price
     end
-
     quantity * discounted_price
   end
 

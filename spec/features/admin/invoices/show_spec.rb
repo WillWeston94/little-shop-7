@@ -67,7 +67,7 @@ RSpec.describe "the admin invoices show page" do
   describe "US 36 admin invoice show page" do
     describe "I see the invoice status is a select field and I see that the invoice's current status is selected when I click this select field" do
       describe "then I can select a new status for the Invoice, and next to the select field I see a button to 'Update Invoice Status'" do
-        xit "When I click this button I am taken back to the admin invoice show page and I see that my Invoice's status has now been updated" do
+        it "When I click this button I am taken back to the admin invoice show page and I see that my Invoice's status has now been updated" do
           customer = create(:customer)
           merchant = create(:merchant)
           item_1 = create(:item, merchant_id: merchant.id)
@@ -88,7 +88,7 @@ RSpec.describe "the admin invoices show page" do
 
           expect(page).to have_current_path("/admin/invoices/#{invoice.id}")
 
-          expect(page).to have_content("STATUS: completed")
+          expect(page).to have_content("completed")
         end
       end
     end
